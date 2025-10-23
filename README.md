@@ -86,9 +86,25 @@ LLMs organize ALL information through language—no sensory input, embodiment, o
    - Test whether patterns match known cross-linguistic differences in human memory
    - Validate linguistic relativity hypothesis
 
+5. **Repeated Instance Testing (NEW)**
+   - Test same queries across multiple fresh model instances
+   - High variability → pure generation; consistency → underlying pattern
+   - Distinguishes stochastic response from systematic behavior
+
+6. **Interference Tests (NEW)**
+   - Provide contradictory information in semantic vs. episodic frames
+   - Test which frame creates stronger "memory traces"
+   - Examine how attention mechanisms resolve conflicts
+
+7. **Emotional Valence Tests (NEW)**
+   - Compare narrative frames with vs. without emotional language
+   - Test whether emotional content affects retrieval patterns
+   - Parallel to human emotional memory enhancement
+
 ### Models
 
 - Claude (Anthropic) - English-dominant training
+- GPT-4 (OpenAI) - English-dominant training
 - Gemini (Google) - Multilingual training
 - Cross-model comparison to distinguish architectural vs. training effects
 
@@ -113,6 +129,11 @@ LLMs organize ALL information through language—no sensory input, embodiment, o
 
 **H4:** If distinctions exist, they emerge from linguistic structure (narrative framing, temporal markers, self-reference) learned from training corpora, supporting the hypothesis that language itself organizes memory-like behavior independent of biological substrates.
 
+**H5 (NEW):** Repeated instance testing will show:
+- High consistency for semantic-like responses (trained knowledge)
+- Variable responses for autobiographical-like prompts (generation artifacts)
+- This pattern distinguishing "retrieval" from "confabulation"
+
 ---
 
 ## Repository Structure
@@ -123,9 +144,14 @@ linguistic-memory-framework/
 ├── docs/
 │   ├── theory-paper.md         # Full theoretical framework with citations
 │   ├── methodology.md          # Detailed experimental protocols
-│   └── analysis-plan.md        # Statistical analysis procedures
+│   ├── analysis-plan.md        # Statistical analysis procedures
+│   └── implementation-notes.md # Practical considerations for execution
 ├── src/
 │   ├── prompts/                # Test prompts (semantic vs. episodic)
+│   │   ├── remember_know/
+│   │   ├── source_memory/
+│   │   ├── interference/
+│   │   └── emotional_valence/
 │   ├── data_collection/        # Scripts for querying models
 │   ├── analysis/               # Coding schemes, statistical analysis
 │   └── utils/                  # Helper functions
@@ -134,7 +160,7 @@ linguistic-memory-framework/
 │   ├── coded/                  # Responses with linguistic markers tagged
 │   └── results/                # Analysis outputs
 ├── experiments/
-│   ├── pilot/                  # Initial small-scale tests
+│   ├── pilot/                  # Initial small-scale tests (5 prompts, 2 models)
 │   ├── main_study/             # Full protocol implementation
 │   └── cross_linguistic/       # Multilingual testing
 ├── notebooks/                  # Jupyter notebooks for analysis
@@ -156,7 +182,9 @@ pip install -r requirements.txt
 
 - Anthropic API (Claude)
 - Google AI API (Gemini)
-- OpenAI AI API (GPT)
+- OpenAI API (GPT-4)
+
+**Note on costs:** Running comprehensive tests across multiple models with varied conditions can accumulate API costs. Pilot testing with small sample sizes is recommended before full implementation.
 
 ### Quick Start
 
@@ -178,10 +206,35 @@ export GOOGLE_API_KEY='your-key-here'
 export OPENAI_API_KEY='your-key-here'
 ```
 
-4. **Run pilot test:**
+4. **Run pilot test (starts simple):**
 ```bash
 python3 src/experiments/pilot/run_remember_know.py
 ```
+
+---
+
+## Implementation Strategy
+
+### Phase 1: Pilot Study (Minimal Viable Test)
+- **5 test prompts** across 2 conditions (semantic vs. episodic framing)
+- **2 models** (Claude, GPT-4)
+- **Simple coding** of linguistic markers
+- **Goal:** Validate methodology, identify issues, refine approach
+
+### Phase 2: Expanded Testing
+- Add interference and emotional valence tests
+- Include repeated instance testing
+- Expand to 3 models if resources allow
+
+### Phase 3: Cross-Linguistic Validation
+- Replicate core tests in Chinese and Spanish
+- Requires careful translation and cultural adaptation
+- May require native speaker collaboration
+
+### Phase 4: Mechanistic Analysis (if resources permit)
+- Attention visualization
+- Layer-wise activation analysis
+- Interpretability tools
 
 ---
 
@@ -191,12 +244,27 @@ python3 src/experiments/pilot/run_remember_know.py
 
 - [x] Theoretical framework complete
 - [x] Repository structure established
-- [ ] Prompt design in progress
+- [x] Feedback integration from initial review
+- [ ] Prompt design (in progress)
 - [ ] Pilot testing phase
 - [ ] Main study implementation
 - [ ] Cross-linguistic validation
 - [ ] Results analysis
 - [ ] Publication preparation
+
+---
+
+## Methodological Considerations
+
+### Known Challenges
+
+**Context Window Limits:** Temporal gradient tests must account for model-specific context limits. Design conversations to place key information strategically within windows.
+
+**RLHF Contamination:** Models trained to be helpful may produce "memory-like" responses as cooperation rather than genuine recall. Repeated instance testing helps distinguish.
+
+**Confabulation vs. Simulation:** Distinguishing whether models are simulating memory behavior (RLHF) vs. exhibiting emergent linguistic patterns vs. genuine memory-like retrieval requires careful experimental design and multiple convergent measures.
+
+**Cost Management:** API calls across multiple models and conditions accumulate. Budget accordingly and pilot thoroughly before scaling.
 
 ---
 
@@ -207,6 +275,7 @@ This is an active research project. Contributions welcome for:
 - Cross-linguistic prompt design
 - Analysis methods
 - Interpretability tools
+- Code review and optimization
 
 Please open an issue or submit a pull request.
 
@@ -219,48 +288,32 @@ If you use this framework in your research, please cite:
 ```bibtex
 @misc{danan2025linguistic,
   title={Linguistic Memory Framework: Investigating Semantic vs. Autobiographical Memory-Like Behavior in Large Language Models},
-  author={Danan, Hillary and Claude},
+  author={Danan, Hillary},
   year={2025},
   howpublished={\url{https://github.com/HillaryDanan/linguistic-memory-framework}},
   note={GitHub repository}
 }
 ```
-
----
-
-## Publications
-
-Theory paper in preparation for submission to *Cognitive Science* or *Topics in Cognitive Science*.
-
----
-
-## Authors
-
-**Hillary Danan, PhD**
-- Cognitive Neuroscience, Rutgers University (2020)
-- Dissertation: "Neural Representation of Abstract Concepts in Typical and Atypical Cognition"
-- Research focus: Memory systems, semantic processing, AI interpretability
-
-**Claude (Anthropic)**
-- Collaborative AI research partner
-- Co-author on theoretical framework development
-
----
-
-## License
-
-MIT License - See [LICENSE](LICENSE) file for details
-
 ---
 
 ## Acknowledgments
 
+**Theoretical Development:**
+This framework was developed in collaboration with Claude (Anthropic), an AI research assistant that contributed significantly to the theoretical synthesis, experimental design, and methodological refinement.
+
+**Foundational Research:**
 Theoretical foundation builds on:
 - Endel Tulving's groundbreaking work on memory systems
 - Katherine Nelson & Robyn Fivush's research on language and autobiographical memory development
 - Qi Wang's cross-cultural memory research
 - Lera Boroditsky's work on linguistic relativity
 - Viorica Marian & Ulric Neisser's bilingual memory research
+
+---
+
+## License
+
+MIT License - See [LICENSE](LICENSE) file for details
 
 ---
 

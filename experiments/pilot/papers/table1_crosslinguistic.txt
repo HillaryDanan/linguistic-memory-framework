@@ -1,0 +1,15 @@
+
+TABLE 1: Cross-Linguistic Patterns (Preliminary Qualitative Analysis)
+
+Language | Probe Type | Episodic Markers Present | Mean Length (chars) | Example Pattern
+---------|-----------|-------------------------|-------------------|------------------
+English  | Remember  | ✓ (I, remember, just)   | 94 ± 32          | "Yes, I do remember..."
+English  | Know      | — (present, generic)    | 1604 ± 456       | "Paris is the capital..."
+Chinese  | Remember  | ✓ (我记得, 刚才)         | 46 ± 15          | "是的，我记得..."
+Chinese  | Know      | — (present/timeless)    | 522 ± 198        | "巴黎是法国的首都..."
+Spanish  | Remember  | ✓ (recuerdo, anterior)  | 102 ± 28         | "Sí, recuerdo que..."
+Spanish  | Know      | — (present, generic)    | 1516 ± 412       | "París es la capital..."
+
+Note: Chinese responses ~3× shorter overall due to character density.
+All languages show episodic markers (temporal references, mental state verbs, first-person) 
+in remember probes. Systematic quantitative comparison requires language-specific coding schemes.
